@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 8 Programming Assignment</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You must implement the data structures using the no prototype approach.
+//       This is what the book uses, so you can copy it.
+//       See also: https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. Analyze the complexity of the isPalindrome function below. Make a
+//    distinction between best, worst, and average case complexity.
+
+function isPalindrome(str) {
+  for (var i = 0; i < str.length/2; i++) {
+    if (str[i] !== str[str.length-i-1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// The best case complexity would if the string was not a palindrome and was
+// detected in the initial check, this would be O(1). The worst case complexity
+// The worst case complexity would be if it had to loop through the entire string 
+// before determining if it was a palindrome, this would be O(n). The average case 
+// complexity would be if it confirmed it was a palindrome before looping through the 
+// entire string, this would also be O(n).
+
+
+// 2. Write a program that finds the minimum element in a stack in O(1) time
+//    complexity. Note that earlier solutions searched through the elements on
+//    the stack but that leads to an O(n) solution.
+//    NOTE: this question is sometimes asked on interviews.
+
+function findMinElement() {
+  var stack = [];
+  var minStack = [];
+
+  function push(value) {
+    stack.push(value);
+    if (minStack.length === 0 || value <= minStack[minStack.length - 1]) {
+      minStack.push(value);
+    }
+  }
+
+  function getMin() {
+    if (minStack.length === 0) {
+      return null; 
+    }
+    return minStack[minStack.length - 1];
+  }
+
+  return {
+    push,
+    getMin,
+  };
+}
+
+var stack = findMinElement();
+stack.push(8);
+stack.push(6);
+stack.push(7);
+stack.push(5);
+stack.push(3);
+stack.push(0);
+stack.push(9);
+
+console.log("Minimum element: " + stack.getMin()); 
+
+
+
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve Project Euler problem 1 (https://projecteuler.net/problem=1).
+
+function sumOfMultiplesOf3Or5() {
+  var sum = 0;
+  for (var i = 0; i < 1000; i++) {
+    if (i%3 === 0 || i%5 === 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+console.log("Sum of multiples of 3 or 5: " + sumOfMultiplesOf3Or5());
+
+
+// 2. Solve Project Euler problem 2 (https://projecteuler.net/problem=2).
+
+function Fibonacci() {
+  var sum = 0;
+  var a = 1;
+  var b = 2;
+  var c = 0;
+  while (a < 4000000) {
+    if (a%2 === 0) {
+      sum += a;
+    }
+    c = a + b;
+    a = b;
+    b = c;
+  }
+  return sum;
+}
+
+console.log("Sum of even Fibonacci numbers under 4 million: " + Fibonacci());
+
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
